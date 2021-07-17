@@ -1,0 +1,29 @@
+name: flutter_a2dp_android
+description: A new flutter plugin project.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_a2dp_platform_interface:
+    path: ../flutter_a2dp_platform_interface
+  flutter_web_plugins:
+    sdk: flutter
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.example.flutter_a2dp_android
+        pluginClass: FlutterA2dpAndroidPlugin
