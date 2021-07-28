@@ -10,8 +10,6 @@ import io.flutter.plugin.common.MethodChannel
 class FlutterA2dpAndroidPlugin: FlutterPlugin {
   companion object {
     const val TAG: String = "FlutterA2dp"
-    const val PREFS_KEY_HANDLE = "store_handle"
-    const val PREFS_FILE = "flutter_a2dp_store"
   }
 
   private lateinit var channel : MethodChannel

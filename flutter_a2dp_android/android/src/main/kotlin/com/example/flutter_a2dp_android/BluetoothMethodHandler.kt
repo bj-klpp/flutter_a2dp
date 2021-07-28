@@ -16,17 +16,9 @@ class BluetoothMethodHandler(
 
         when (call.method) {
             "getNumber" -> result.success(4)
-            "init" -> initialize(args, result)
             "getBondedSinks" -> getBondedSinks(args, result)
             else -> result.notImplemented()
         }
-    }
-
-    private fun initialize(args: ArrayList<*>, result: MethodChannel.Result) {
-        val rawHandle = args[0] as Long
-
-        storeCallbackHandle(rawHandle)
-        result.success(true)
     }
 
     private fun getBondedSinks(args: ArrayList<*>, result: MethodChannel.Result) {
@@ -35,13 +27,5 @@ class BluetoothMethodHandler(
             .map { it.toMap() }
 
         result.success(devices)
-    }
-
-    private fun storeCallbackHandle(rawHandle: Long) {
-        Log.d(FlutterA2dpAndroidPlugin.TAG, "Storing raw handle [$rawHandle]")
-
-        context.getSharedPreferences(FlutterA2dpAndroidPlugin.PREFS_FILE, Context.MODE_PRIVATE).edit()
-            .putLong(FlutterA2dpAndroidPlugin.PREFS_KEY_HANDLE, rawHandle)
-            .apply()
     }
 }

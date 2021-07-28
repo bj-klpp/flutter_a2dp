@@ -18,7 +18,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    init();
     getNumber().then((value) {
       setState(() {
         number = value;
