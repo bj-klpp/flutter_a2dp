@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_a2dp_platform_interface/flutter_a2dp_platform_interface.dart';
 
 class A2dpMethodChannel extends FlutterA2dpInterface {
-  static const MethodChannel _methodChannel = MethodChannel('a2dp');
+  static const MethodChannel _methodChannel = MethodChannel("com.github.polydome.fluttera2dp/bluetooth");
 
   @override
   Future<int> getNumber() async {
