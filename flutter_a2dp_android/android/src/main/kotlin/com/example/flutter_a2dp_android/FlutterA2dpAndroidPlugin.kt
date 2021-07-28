@@ -1,5 +1,6 @@
 package com.example.flutter_a2dp_android
 
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
@@ -20,9 +21,11 @@ class FlutterA2dpAndroidPlugin: FlutterPlugin, MethodCallHandler {
 
   private lateinit var channel : MethodChannel
   private lateinit var context: Context
+  private lateinit var bluetoothAdapter: BluetoothAdapter
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     context = flutterPluginBinding.applicationContext
+    bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "a2dp")
     channel.setMethodCallHandler(this)
   }
@@ -34,6 +37,7 @@ class FlutterA2dpAndroidPlugin: FlutterPlugin, MethodCallHandler {
     when (call.method) {
       "getNumber" -> result.success(4)
       "init" -> initialize(args, result)
+      "getBondedSinks" -> getBondedSinks(args, result)
       else -> result.notImplemented()
     }
   }
@@ -47,6 +51,14 @@ class FlutterA2dpAndroidPlugin: FlutterPlugin, MethodCallHandler {
 
     storeCallbackHandle(rawHandle)
     result.success(true)
+  }
+
+  private fun getBondedSinks(args: ArrayList<*>, result: Result) {
+    val devices = bluetoothAdapter.bondedDevices
+      .filter { it.isAudioSink }
+      .map { it.toMap() }
+
+    result.success(devices)
   }
 
   private fun storeCallbackHandle(rawHandle: Long) {

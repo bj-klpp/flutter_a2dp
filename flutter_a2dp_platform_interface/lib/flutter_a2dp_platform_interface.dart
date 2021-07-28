@@ -22,4 +22,8 @@ abstract class FlutterA2dpInterface extends PlatformInterface {
   Future<void> init() async {
     throw UnimplementedError("init() has not been implemented");
   }
+
+  Future<List<Map>> getBondedSinks() async {
+    throw UnimplementedError("getBondedSinks() has not been implemented");
+  }
 }

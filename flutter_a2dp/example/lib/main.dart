@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_a2dp/flutter_a2dp.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,9 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         number = value;
       });
+    });
+    Permission.location.request().then((value) {
+      getBondedSinks().then((value) { print(value); });
     });
   }
 

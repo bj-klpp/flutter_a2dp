@@ -7,3 +7,7 @@ Future<int> getNumber() async {
 Future<void> init() async {
   await platform.init();
 }
+
+Future<List<Map>> getBondedSinks() async {
+  return await platform.getBondedSinks();
+}

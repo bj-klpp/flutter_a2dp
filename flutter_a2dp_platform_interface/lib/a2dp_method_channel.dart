@@ -19,4 +19,13 @@ class A2dpMethodChannel extends FlutterA2dpInterface {
 
     await _methodChannel.invokeMethod("init", <dynamic>[handle!.toRawHandle()]);
   }
+
+  @override
+  Future<List<Map>> getBondedSinks() async {
+    final result = await _methodChannel.invokeMethod<List<Object?>>('getBondedSinks', []);
+    
+    final devices = result!.map((deviceMap) => Map<String, Object>.from(deviceMap as Map));
+
+    return List<Map>.from(devices);
+  }
 }
