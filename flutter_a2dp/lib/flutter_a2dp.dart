@@ -6,7 +6,9 @@ Future<List<BluetoothDevice>> getBondedSinks() async {
       .getBondedDevices()
       .then((rawDevices) => rawDevices.map((e) => BluetoothDevice.fromMap(e)))
       .then((deserializedDevices) =>
-          List<BluetoothDevice>.from(deserializedDevices));
+          deserializedDevices.where((device) => device.isAudioSink))
+      .then(
+          (deserializedSinks) => List<BluetoothDevice>.from(deserializedSinks));
 
   return parsedDevices;
 }

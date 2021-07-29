@@ -19,12 +19,3 @@ val BluetoothDevice.isConnected: Boolean
     } catch (e: Exception) {
         false
     }
-
-val BluetoothDevice.isAudioSink: Boolean
-    get() = this.serviceUUIDs.any { it == UUID_AUDIO_SINK }
-
-private val BluetoothDevice.serviceUUIDs: List<Long>
-    get() = this.uuids
-        .map { it.uuid.mostSignificantBits ushr 32 }
-
-private const val UUID_AUDIO_SINK = 0x110bL

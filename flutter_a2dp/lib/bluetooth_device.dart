@@ -16,6 +16,11 @@ class BluetoothDevice {
       isConnected: map["isConnected"] as bool,
       uuids: List<String>.from(map["uuids"] as List));
 
+  bool get isAudioSink => _serviceUuids.contains("110B");
+
+  Iterable<String> get _serviceUuids =>
+      uuids.map((e) => e.substring(4, 8).toUpperCase());
+
   @override
   String toString() {
     return 'BluetoothDevice{address: $address, name: $name, isConnected: $isConnected, uuids: $uuids}';
