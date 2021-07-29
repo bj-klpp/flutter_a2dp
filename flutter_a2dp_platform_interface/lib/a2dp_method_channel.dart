@@ -5,8 +5,8 @@ class A2dpMethodChannel extends FlutterA2dpInterface {
   static const MethodChannel _methodChannel = MethodChannel("com.github.polydome.fluttera2dp/bluetooth");
 
   @override
-  Future<List<Map>> getBondedSinks() async {
-    final result = await _methodChannel.invokeMethod<List<Object?>>('getBondedSinks', []);
+  Future<List<Map>> getBondedDevices() async {
+    final result = await _methodChannel.invokeMethod<List<Object?>>('getBondedDevices', []);
     
     final devices = result!.map((deviceMap) => Map<String, Object>.from(deviceMap as Map));
 

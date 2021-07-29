@@ -12,16 +12,12 @@ class BluetoothMethodHandler(
         Log.d(TAG, "Method called [${call.method}]")
 
         when (call.method) {
-            "getBondedSinks" -> getBondedSinks(result)
+            "getBondedDevices" -> getBondedDevices(result)
             else -> result.notImplemented()
         }
     }
 
-    private fun getBondedSinks(result: MethodChannel.Result) {
-        val devices = bluetoothAdapter.bondedDevices
-            .filter { it.isAudioSink }
-            .map { it.toMap() }
-
-        result.success(devices)
+    private fun getBondedDevices(result: MethodChannel.Result) {
+        result.success(bluetoothAdapter.bondedDevices.map { it.toMap() })
     }
 }
