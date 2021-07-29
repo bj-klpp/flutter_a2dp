@@ -16,23 +16,19 @@ abstract class FlutterA2dpInterface extends PlatformInterface {
     _a2dpInterface = instance;
   }
 
+  Future<Map<String, Object>?> get connectedSink =>
+      throw UnimplementedError("getBondedDevices() has not been implemented");
+
   Future<List<Map<String, Object>>> getBondedDevices() async {
     throw UnimplementedError("getBondedDevices() has not been implemented");
   }
 
   Future<void> connectToAddressWithA2dp(String address) async {
-    throw UnimplementedError("connectToAddressWithA2dp() has not been implemented");
+    throw UnimplementedError(
+        "connectToAddressWithA2dp() has not been implemented");
   }
 
   Stream<A2dpStatus> get status {
     throw UnimplementedError("status has not been implemented");
-  }
-
-  Future<void> startListeningStatus() {
-    throw UnimplementedError("startListeningStatus has not been implemented");
-  }
-
-  Future<void> stopListeningStatus() {
-    throw UnimplementedError("stopListeningStatus has not been implemented");
   }
 }

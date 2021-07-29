@@ -4,6 +4,8 @@ import 'package:flutter_a2dp/bluetooth_device.dart';
 import 'package:flutter_a2dp_platform_interface/a2dp_status.dart';
 import 'package:flutter_a2dp/src/platform_proxy.dart';
 
+export 'package:flutter_a2dp_platform_interface/a2dp_status.dart';
+
 Future<List<BluetoothDevice>> getBondedSinks() async {
   final parsedDevices = platform
       .getBondedDevices()
@@ -17,17 +19,10 @@ Future<List<BluetoothDevice>> getBondedSinks() async {
 }
 
 class A2dp {
-  late final _statusController = StreamController<A2dpStatus>(
-    onListen: platform.startListeningStatus,
-    onCancel: platform.stopListeningStatus,
-    onPause: platform.stopListeningStatus,
-    onResume: platform.startListeningStatus
-  );
-
-
-  A2dp() {
-    _statusController.addStream(platform.status);
+  Future<BluetoothDevice?> get connectedSink async {
+    final rawSink = await platform.connectedSink;
+    return rawSink != null ? BluetoothDevice.fromMap(rawSink) : null;
   }
 
-  Stream<A2dpStatus> get status => _statusController.stream;
+  Stream<A2dpStatus> get status => platform.status;
 }

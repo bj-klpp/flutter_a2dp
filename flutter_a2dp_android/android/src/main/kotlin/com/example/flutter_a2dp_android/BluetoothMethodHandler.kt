@@ -15,6 +15,7 @@ class BluetoothMethodHandler(
         when (call.method) {
             "getBondedDevices" -> getBondedDevices(result)
             "connectToAddressWithA2dp" -> connectToAddressWithA2dp(call, result)
+            "getConnectedSink" -> result.success(a2dpAdapter.connectedSink?.toMap())
             else -> result.notImplemented()
         }
     }

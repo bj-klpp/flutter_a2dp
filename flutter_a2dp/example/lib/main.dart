@@ -21,12 +21,17 @@ class _MyAppState extends State<MyApp> {
     Permission.location.request().then((value) {
       getBondedSinks().then((value) {
         print(value);
-        final device = value.first;
-        device.connectWithA2dp().then((value) => print("Probably connected"));
+        // final device = value.first;
+        // device.connectWithA2dp().then((value) => print("Probably connected"));
       });
     });
-    A2dp().status.listen((event) {
+    final a2dp = A2dp();
+
+    a2dp.status.listen((event) {
       print(event);
+      if (event == A2dpStatus.connected) {
+        a2dp.connectedSink.then((value) => print(value));
+      }
     });
   }
 

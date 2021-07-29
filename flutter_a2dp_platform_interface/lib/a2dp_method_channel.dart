@@ -26,17 +26,15 @@ class A2dpMethodChannel extends FlutterA2dpInterface {
   }
 
   @override
-  Future<void> startListeningStatus() async {
-    await _methodChannel.invokeMethod("startListeningStatus");
-  }
-
-  @override
-  Future<void> stopListeningStatus() async {
-    await _methodChannel.invokeMethod("stopListeningStatus");
-  }
-
-  @override
   Stream<A2dpStatus> get status => _eventChannel
       .receiveBroadcastStream()
       .map((statusName) => a2dpStatusFromName(statusName as String));
+
+  @override
+  Future<Map<String, Object>?> get connectedSink async {
+    final rawDevice = await _methodChannel
+        .invokeMethod<Object?>('getConnectedSink');
+
+    return rawDevice != null ? Map<String, Object>.from(rawDevice as Map) : null;
+  }
 }
