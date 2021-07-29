@@ -1,4 +1,5 @@
 import 'package:flutter_a2dp_platform_interface/a2dp_method_channel.dart';
+import 'package:flutter_a2dp_platform_interface/a2dp_status.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 abstract class FlutterA2dpInterface extends PlatformInterface {
@@ -21,5 +22,17 @@ abstract class FlutterA2dpInterface extends PlatformInterface {
 
   Future<void> connectToAddressWithA2dp(String address) async {
     throw UnimplementedError("connectToAddressWithA2dp() has not been implemented");
+  }
+
+  Stream<A2dpStatus> get status {
+    throw UnimplementedError("status has not been implemented");
+  }
+
+  Future<void> startListeningStatus() {
+    throw UnimplementedError("startListeningStatus has not been implemented");
+  }
+
+  Future<void> stopListeningStatus() {
+    throw UnimplementedError("stopListeningStatus has not been implemented");
   }
 }

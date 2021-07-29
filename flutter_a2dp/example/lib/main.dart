@@ -25,6 +25,9 @@ class _MyAppState extends State<MyApp> {
         device.connectWithA2dp().then((value) => print("Probably connected"));
       });
     });
+    A2dp().status.listen((event) {
+      print(event);
+    });
   }
 
   @override
