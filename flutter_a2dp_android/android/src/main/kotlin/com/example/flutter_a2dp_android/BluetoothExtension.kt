@@ -7,7 +7,8 @@ fun BluetoothDevice.toMap(): HashMap<String, Any>{
     return hashMapOf(
         "address" to address,
         "name" to name,
-        "isConnected" to isConnected
+        "isConnected" to isConnected,
+        "uuids" to uuids.map { it.uuid.toString() }
     )
 }
 
