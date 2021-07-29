@@ -1,3 +1,5 @@
+import 'package:flutter_a2dp/src/platform_proxy.dart';
+
 class BluetoothDevice {
   String address;
   String name;
@@ -17,6 +19,9 @@ class BluetoothDevice {
       uuids: List<String>.from(map["uuids"] as List));
 
   bool get isAudioSink => _serviceUuids.contains("110B");
+
+  Future<void> connectWithA2dp() async =>
+      platform.connectToAddressWithA2dp(address);
 
   Iterable<String> get _serviceUuids =>
       uuids.map((e) => e.substring(4, 8).toUpperCase());

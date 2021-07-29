@@ -19,7 +19,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     Permission.location.request().then((value) {
-      getBondedSinks().then((value) { print(value); });
+      getBondedSinks().then((value) {
+        print(value);
+        final device = value.first;
+        device.connectWithA2dp().then((value) => print("Probably connected"));
+      });
     });
   }
 

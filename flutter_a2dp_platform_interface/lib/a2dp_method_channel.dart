@@ -14,4 +14,10 @@ class A2dpMethodChannel extends FlutterA2dpInterface {
 
     return List<Map<String, Object>>.from(devices);
   }
+
+  @override
+  Future<void> connectToAddressWithA2dp(String address) async {
+    return await _methodChannel.invokeMethod(
+        "connectToAddressWithA2dp", <String, dynamic>{'address': address});
+  }
 }
