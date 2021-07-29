@@ -18,11 +18,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    getNumber().then((value) {
-      setState(() {
-        number = value;
-      });
-    });
     Permission.location.request().then((value) {
       getBondedSinks().then((value) { print(value); });
     });

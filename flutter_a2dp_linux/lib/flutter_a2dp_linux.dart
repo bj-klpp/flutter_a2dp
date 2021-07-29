@@ -7,9 +7,4 @@ class FlutterA2dpLinux extends FlutterA2dpInterface {
   static void registerWith() {
     FlutterA2dpInterface.instance = FlutterA2dpLinux();
   }
-
-  @override
-  Future<int> getNumber() async {
-    return 8;
-  }
 }

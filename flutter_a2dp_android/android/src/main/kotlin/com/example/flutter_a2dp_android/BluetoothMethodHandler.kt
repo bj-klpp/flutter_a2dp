@@ -12,7 +12,6 @@ class BluetoothMethodHandler(
         Log.d(TAG, "Method called [${call.method}]")
 
         when (call.method) {
-            "getNumber" -> result.success(4)
             "getBondedSinks" -> getBondedSinks(result)
             else -> result.notImplemented()
         }
