@@ -12,10 +12,17 @@ class A2dpAdapter(private val a2dp: BluetoothA2dp) {
     private val connectMethod =
         a2dp.javaClass.getMethod("connect", BluetoothDevice::class.java)
 
+    private val disconnectMethod =
+        a2dp.javaClass.getMethod("disconnect", BluetoothDevice::class.java)
+
     val connectedSink get() = a2dp.connectedDevices.firstOrNull()
 
     fun connect(device: BluetoothDevice) {
         connectMethod(a2dp, device)
+    }
+
+    fun disconnect(device: BluetoothDevice) {
+        disconnectMethod(a2dp, device)
     }
 }
 
