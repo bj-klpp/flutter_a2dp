@@ -30,7 +30,10 @@ class _MyAppState extends State<MyApp> {
     a2dp.status.listen((event) {
       print(event);
       if (event == A2dpStatus.connected) {
-        a2dp.connectedSink.then((value) => print(value));
+        a2dp.connectedSink.then((value) {
+          print("connected to $value");
+          value!.disconnect().then((value) => "probably disconnected");
+        });
       }
     });
   }

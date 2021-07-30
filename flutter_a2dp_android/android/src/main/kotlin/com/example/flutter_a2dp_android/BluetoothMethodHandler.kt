@@ -15,6 +15,7 @@ class BluetoothMethodHandler(
         when (call.method) {
             "getBondedDevices" -> getBondedDevices(result)
             "connectToAddressWithA2dp" -> connectToAddressWithA2dp(call, result)
+            "disconnectFromAddressWithA2dp" -> disconnectFromAddressWithA2dp(call, result)
             "getConnectedSink" -> result.success(a2dpAdapter.connectedSink?.toMap())
             else -> result.notImplemented()
         }
@@ -25,15 +26,23 @@ class BluetoothMethodHandler(
     }
 
     private fun connectToAddressWithA2dp(call: MethodCall, result: MethodChannel.Result) {
-        if (!call.hasArgument("address")) {
-            throw IllegalStateException("Missing argument: address")
-        }
-
-        val address = call.argument<String>("address")
-
+        val address = call.requireArgument<String>("address")
         val device = bluetoothAdapter.getRemoteDevice(address)
         a2dpAdapter.connect(device)
 
         result.success(null)
     }
+
+    private fun disconnectFromAddressWithA2dp(call: MethodCall, result: MethodChannel.Result) {
+        val address = call.requireArgument<String>("address")
+        val device = bluetoothAdapter.getRemoteDevice(address)
+        a2dpAdapter.disconnect(device)
+
+        result.success(null)
+    }
+
+    private fun <T> MethodCall.requireArgument(name: String): T? =
+        if (hasArgument(name))
+            argument<T>(name)
+        else throw IllegalStateException("Missing argument: $name")
 }

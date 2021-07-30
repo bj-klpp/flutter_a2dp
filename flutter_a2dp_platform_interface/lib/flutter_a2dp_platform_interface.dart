@@ -31,4 +31,9 @@ abstract class FlutterA2dpInterface extends PlatformInterface {
   Stream<A2dpStatus> get status {
     throw UnimplementedError("status has not been implemented");
   }
+
+  Future<void> disconnectFromAddressWithA2dp(String address) async {
+    throw UnimplementedError(
+        "disconnectToAddressWithA2dp() has not been implemented");
+  }
 }

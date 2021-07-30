@@ -23,6 +23,9 @@ class BluetoothDevice {
   Future<void> connectWithA2dp() async =>
       platform.connectToAddressWithA2dp(address);
 
+  Future<void> disconnect() async =>
+      platform.disconnectFromAddressWithA2dp(address);
+
   Iterable<String> get _serviceUuids =>
       uuids.map((e) => e.substring(4, 8).toUpperCase());
 
