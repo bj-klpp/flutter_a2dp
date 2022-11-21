@@ -29,11 +29,19 @@ class A2dpAdapter(private val a2dp: BluetoothA2dp) {
 suspend fun BluetoothAdapter.getA2dpAdapter(context: Context): A2dpAdapter? = suspendCoroutine {
     getProfileProxy(context, object : BluetoothProfile.ServiceListener {
         override fun onServiceConnected(profile: Int, proxy: BluetoothProfile?) {
-            it.resume(A2dpAdapter(proxy as BluetoothA2dp))
+            try {
+                it.resume(A2dpAdapter(proxy as BluetoothA2dp))
+            } catch (e: Exception) {
+                
+            }
         }
 
         override fun onServiceDisconnected(profile: Int) {
-            it.resume(null)
+            try {
+                it.resume(null)
+            } catch (e: Exception) {
+                
+            }
         }
     }, BluetoothProfile.A2DP);
 }
